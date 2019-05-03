@@ -4,17 +4,24 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    height: 100vh;
     margin: 0;
-    display: flex;
+    display: grid;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-section {
+#buttons {
+    display: flex;
+}
+
+#board {
     display: grid;
-    grid-template-columns: repeat(3, 10vmin);
-    grid-template-rows: repeat(3, 10vmin);
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
     grid-gap: 1vmin;
+}
+
+div {
+    width: 10vmin;
 }
