@@ -49,9 +49,29 @@ const piece1 = document.createElement('div');
 /*----- functions -----*/
 //init();
 
-buttonsArray.forEach(function(el) {
-    let numButton = document.createElement('button');
-    document.getElementById('numbers').appendChild(numButton);
-    numButton.textContent = el.name;
-})
 
+function createButtons(x) {
+    x.forEach(function(el) {
+        let numButton = document.createElement('button');
+        document.getElementById('numbers').appendChild(numButton);
+        numButton.textContent = el.name;
+    })
+    
+}
+
+function shuffle(array) {
+    let i, j, x;
+    for(i = buttonsArray.length - 1; i > 0; i -= 1) {
+        j = Math.floor(Math.random() * (i + 1))
+        temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+    }
+    return array;
+}
+
+// function placePiece(piece) {
+//     let 
+// }
+
+createButtons(shuffle(buttonsArray));
