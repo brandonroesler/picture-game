@@ -1,7 +1,7 @@
 /*----- constants -----*/
 const buttonsArray = [
     {
-        name: '1',
+        name: 1,
         src: '../assets/img1.jpg'
     },
     {
@@ -39,7 +39,6 @@ const buttonsArray = [
 ];
 
 /*----- app's state (variables) -----*/
-const buttonEls = document.createElement('button')
 
 /*----- cached element references -----*/
 const piece1 = document.createElement('div');
@@ -49,3 +48,10 @@ const piece1 = document.createElement('div');
 
 /*----- functions -----*/
 //init();
+
+buttonsArray.forEach(function(el) {
+    let numButton = document.createElement('button');
+    document.getElementById('numbers').appendChild(numButton);
+    numButton.textContent = el.name;
+})
+
