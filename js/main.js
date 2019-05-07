@@ -1,7 +1,7 @@
 /*----- constants -----*/
 const buttonsArray = [
     {
-        name: 1,
+        name: '1',
         src: '../assets/img1.jpg'
     },
     {
@@ -46,6 +46,9 @@ const piece1 = document.createElement('div');
 /*----- event listeners -----*/
 // document.querySelector('button').addEventListener('click', placePiece);
 
+
+
+
 /*----- functions -----*/
 //init();
 
@@ -75,3 +78,16 @@ function shuffle(array) {
 // }
 
 createButtons(shuffle(buttonsArray));
+
+function init() {
+    // board = {
+    //     0, 0, 0,
+    //     0, 0, 0,
+    //     0, 0, 0,
+    // }
+    render();
+}
+
+function render() {
+
+}
