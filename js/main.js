@@ -44,7 +44,6 @@ const buttonsArray = [
 
 /*----- event listeners -----*/
 
-
 /*----- functions -----*/
 
 function createButtons(shuffledArray) {
@@ -56,7 +55,6 @@ function createButtons(shuffledArray) {
         numButton.disabled = false;
         numButton.addEventListener('click', placePiece);
     })
-    
 }
 //Shuffles original array and returns it
 function shuffle(array) {
@@ -70,7 +68,6 @@ function shuffle(array) {
     console.log(buttonsArray)
     console.log(array)
     return array;
-    
 }
 
 function placePiece(event) {    
