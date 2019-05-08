@@ -2,92 +2,79 @@
 const buttonsArray = [
     {
         name: '1',
-        src: '../assets/img1.jpg'
+        src: 'assets/2.jpg'
     },
     {
         name: '2',
-        src: '../assets/img2.jpg'
+        src: 'assets/6.jpg'
     },
     {
         name: '3',
-        src: '../assets/img3.jpg'
+        src: 'assets/8.jpg'
     },
     {
         name: '4',
-        src: '../assets/img4.jpg'
+        src: 'assets/4.jpg'
     },
     {
         name: '5',
-        src: '../assets/img5.jpg'
+        src: 'assets/3.jpg'
     },
     {
         name: '6',
-        src: '../assets/img6.jpg'
+        src: 'assets/9.jpg'
     },
     {
         name: '7',
-        src: '../assets/img7.jpg'
+        src: 'assets/7.jpg'
     },
     {
         name: '8',
-        src: '../assets/img8.jpg'
+        src: 'assets/1.jpg'
     },
     {
         name: '9',
-        src: '../assets/img9.jpg'
+        src: 'assets/5.jpg'
     }
 ];
 
 /*----- app's state (variables) -----*/
 
 /*----- cached element references -----*/
-const piece1 = document.createElement('div');
 
 /*----- event listeners -----*/
-// document.querySelector('button').addEventListener('click', placePiece);
-
-
 
 
 /*----- functions -----*/
-//init();
 
-
-function createButtons(x) {
-    x.forEach(function(el) {
+function createButtons(shuffledArray) {
+    shuffledArray.forEach(function(el) {
         let numButton = document.createElement('button');
         document.getElementById('numbers').appendChild(numButton);
         numButton.textContent = el.name;
+        numButton.data = el.src
+        numButton.disabled = false;
+        numButton.addEventListener('click', placePiece);
     })
     
 }
-
+//Shuffles original array and returns it
 function shuffle(array) {
-    let i, j, x;
-    for(i = buttonsArray.length - 1; i > 0; i -= 1) {
+    let i, j, temp;
+    for(i = array.length - 1; i > 0; i -= 1) {
         j = Math.floor(Math.random() * (i + 1))
         temp = array[i]
         array[i] = array[j]
         array[j] = temp
     }
+    console.log(buttonsArray)
+    console.log(array)
     return array;
+    
 }
 
-// function placePiece(piece) {
-//     let 
-// }
+function placePiece(event) {    
+    document.getElementById(event.target.innerHTML).style.backgroundImage =`url(${event.target.data})`;
+}
 
 createButtons(shuffle(buttonsArray));
-
-function init() {
-    // board = {
-    //     0, 0, 0,
-    //     0, 0, 0,
-    //     0, 0, 0,
-    // }
-    render();
-}
-
-function render() {
-
-}
