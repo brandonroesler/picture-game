@@ -47,6 +47,7 @@ const buttonsArray = [
 /*----- functions -----*/
 
 function createButtons(shuffledArray) {
+    //shuffle array
     shuffledArray.forEach(function(el) {
         let numButton = document.createElement('button');
         document.getElementById('numbers').appendChild(numButton);
@@ -55,7 +56,13 @@ function createButtons(shuffledArray) {
         numButton.disabled = false;
         numButton.addEventListener('click', placePiece);
     })
+    // refresh button
+    let refresh = document.createElement('button');
+    document.getElementById('refresh').appendChild(refresh);
+    refresh.textContent = "Start Over"
+    refresh.addEventListener('click', startOver);
 }
+
 //Shuffles original array and returns it
 function shuffle(array) {
     let i, j, temp;
@@ -65,13 +72,27 @@ function shuffle(array) {
         array[i] = array[j]
         array[j] = temp
     }
-    console.log(buttonsArray)
-    console.log(array)
     return array;
 }
 
 function placePiece(event) {    
     document.getElementById(event.target.innerHTML).style.backgroundImage =`url(${event.target.data})`;
 }
+
+function startOver() {
+    let reload = document.location.reload(true);
+}
+
+var seconds_left = 10;
+var interval = setInterval(function() {
+    document.getElementById('timer').textContent = --seconds_left;
+
+    if (seconds_left <= 0)
+    {
+       document.getElementById('timer').innerHTML = "Maybe Next Year";
+       clearInterval(interval);
+    }
+    document.getElementById('timer').style.fontSize = "40px";
+}, 1000);
 
 createButtons(shuffle(buttonsArray));
