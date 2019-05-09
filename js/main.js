@@ -52,16 +52,31 @@ function createButtons(shuffledArray) {
         let numButton = document.createElement('button');
         document.getElementById('numbers').appendChild(numButton);
         numButton.textContent = el.name;
+        // numButton.style.fontFamily = "bangers";
         numButton.data = el.src
-        numButton.disabled = false;
+        numButton.disabled = true;
+        numButton.id = `btn${el.name -1}`//make sure the id are 0 indexed
         numButton.addEventListener('click', placePiece);
+        //game logic
+        if((el.name === '1')) {
+            numButton.disabled = false;
+        }
     })
+    //start button
+    let start = document.createElement('button');
+    document.getElementById('start').appendChild(start);
+    start.textContent = "Start";
+    start.style.fontFamily = "bangers";
+    start.addEventListener('click', begin);
     // refresh button
     let refresh = document.createElement('button');
     document.getElementById('refresh').appendChild(refresh);
-    refresh.textContent = "Start Over"
+    refresh.textContent = "Try Again"
+    refresh.style.fontFamily = "bangers";
     refresh.addEventListener('click', startOver);
 }
+
+//change
 
 //Shuffles original array and returns it
 function shuffle(array) {
@@ -75,24 +90,34 @@ function shuffle(array) {
     return array;
 }
 
-function placePiece(event) {    
-    document.getElementById(event.target.innerHTML).style.backgroundImage =`url(${event.target.data})`;
+function placePiece(event) {
+    let nextButton = document.getElementById(`btn${event.target.textContent}`)
+    console.log('woot', nextButton);
+   
+    const eligible = buttonsArray.name;
+
+    //search for the div ids and switch to the correct background
+    document.getElementById(event.target.textContent).style.backgroundImage =`url(${event.target.data})`;
+    event.target.disabled = true
+    nextButton.disabled = false
 }
+
 
 function startOver() {
     let reload = document.location.reload(true);
 }
 
-var seconds_left = 10;
-var interval = setInterval(function() {
-    document.getElementById('timer').textContent = --seconds_left;
-
-    if (seconds_left <= 0)
-    {
-       document.getElementById('timer').innerHTML = "Maybe Next Year";
-       clearInterval(interval);
-    }
-    document.getElementById('timer').style.fontSize = "40px";
-}, 1000);
+function begin() {
+    var seconds_left = 10;
+    var interval = setInterval(function() {
+        document.getElementById('timer').textContent = --seconds_left;
+        
+        if (seconds_left <= 0) {
+            document.getElementById('timer').innerHTML = "Maybe Next Year";
+            clearInterval(interval);
+        }
+        document.getElementById('timer').style.fontSize = "40px";
+    }, 1000);
+}
 
 createButtons(shuffle(buttonsArray));
