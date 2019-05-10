@@ -47,17 +47,20 @@ const buttonsArray = [
 /*----- functions -----*/
 
 function createButtons(shuffledArray) {
-    //shuffle array
+    //iterates through the shuffled array
     shuffledArray.forEach(function(el) {
+        //creates a button for each item in the shuffled array and appends it as a child of the numbers ID
         let numButton = document.createElement('button');
         document.getElementById('numbers').appendChild(numButton);
         numButton.textContent = el.name;
-        // numButton.style.fontFamily = "bangers";
+        //links the new shuffled index with its original src so the images are linked with the correct button
         numButton.data = el.src
+        //disables all buttons
         numButton.disabled = true;
-        numButton.id = `btn${el.name -1}`//make sure the id are 0 indexed
+        //make sure the id are 0 indexed
+        numButton.id = `btn${el.name -1}`
         numButton.addEventListener('click', placePiece);
-        //game logic
+        //game logic to enable each button starting with 1
         if((el.name === '1')) {
             numButton.disabled = false;
         }
@@ -91,11 +94,8 @@ function shuffle(array) {
 }
 
 function placePiece(event) {
+    //allows us to know what the next button to enable is
     let nextButton = document.getElementById(`btn${event.target.textContent}`)
-    console.log('woot', nextButton);
-   
-    const eligible = buttonsArray.name;
-
     //search for the div ids and switch to the correct background
     document.getElementById(event.target.textContent).style.backgroundImage =`url(${event.target.data})`;
     event.target.disabled = true
@@ -107,17 +107,21 @@ function startOver() {
     let reload = document.location.reload(true);
 }
 
+var seconds_left = 10;
 function begin() {
-    var seconds_left = 10;
+    document.getElementById('start').style.pointerEvents = "none";
     var interval = setInterval(function() {
-        document.getElementById('timer').textContent = --seconds_left;
-        
-        if (seconds_left <= 0) {
+        if(seconds_left) {
+        document.getElementById('timer').textContent = seconds_left--;
+        document.getElementById('numbers').style.pointerEvents = "auto";
+        } else {
             document.getElementById('timer').innerHTML = "Maybe Next Year";
             clearInterval(interval);
+            document.getElementById('numbers').style.pointerEvents = "none";
         }
         document.getElementById('timer').style.fontSize = "40px";
     }, 1000);
 }
 
 createButtons(shuffle(buttonsArray));
+document.getElementById('numbers').style.pointerEvents = "none";
